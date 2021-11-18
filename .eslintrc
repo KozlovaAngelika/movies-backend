@@ -19,6 +19,12 @@
     "arrow-body-style": 0,
     "@typescript-eslint/explicit-function-return-type": 1,
     "import/prefer-default-export": 0,
+    "import/newline-after-import": ["error", { "count": 1 }],
+    "padding-line-between-statements": [
+      "error",
+      { "blankLine": "always", "prev": "*", "next": "return" },
+      { "blankLine": "always", "prev": "*", "next": "export" }
+    ],
     "@typescript-eslint/member-delimiter-style": [
       "error",
       {
