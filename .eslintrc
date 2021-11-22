@@ -1,0 +1,70 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+    "standard-with-typescript",
+    "eslint-config-prettier",
+    "eslint-config-airbnb-base",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended",
+    "prettier",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript"
+  ],
+  "plugins": ["@typescript-eslint", "import"],
+  "parserOptions": {
+    "project": ["tsconfig.json"],
+    "sourceType": "module"
+  },
+  "rules": {
+    "import/extensions": 0,
+    "import/no-unresolved": "off",
+    "import/named": "warn",
+    "import/namespace": "warn",
+    "import/no-named-as-default": "off",
+    "import/export": "warn",
+    "import/order": [
+      "error",
+      {
+        "groups": ["builtin", "external", "parent", "sibling", "index"],
+        "newlines-between": "never",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ],
+    "no-console": 2,
+    "eol-last": 0,
+    "arrow-body-style": 0,
+    "no-unexpected-multiline": 0,
+    "@typescript-eslint/explicit-function-return-type": 1,
+    "import/prefer-default-export": 0,
+    "import/newline-after-import": ["error", { "count": 1 }],
+    "padding-line-between-statements": [
+      "error",
+      { "blankLine": "always", "prev": "*", "next": "return" },
+      { "blankLine": "always", "prev": "*", "next": "export" }
+    ],
+    "@typescript-eslint/member-delimiter-style": [
+      "error",
+      {
+        "multiline": {
+          "delimiter": "semi",
+          "requireLast": true
+        },
+        "singleline": {
+          "delimiter": "semi",
+          "requireLast": false
+        }
+      }
+    ],
+    "max-len": [2, { "code": 120 }],
+    "brace-style": 0,
+    "function-paren-newline": 0,
+    "implicit-arrow-linebreak": ["error", "beside"],
+    "@typescript-eslint/strict-boolean-expressions": 0,
+    "default-param-last": 0,
+    "@typescript-eslint/default-param-last": 0
+  }
+}
