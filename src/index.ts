@@ -1,10 +1,13 @@
 import dotenv from 'dotenv';
 import express from 'express';
 import mongoose from 'mongoose';
+import moviesRouter from './Routes/movies';
 
 const PORT = process.env.PORT || 5000;
 const uri = `mongodb+srv://${process.env.KEY}MovieDB@cluster0.jqsgi.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 const app = express();
+
+app.use(moviesRouter);
 
 dotenv.config();
 
