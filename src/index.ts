@@ -1,15 +1,17 @@
+import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import express from 'express';
 import mongoose from 'mongoose';
-import moviesRouter from './Routes/movies';
-
-const PORT = process.env.PORT || 5000;
-const uri = `mongodb+srv://${process.env.KEY}MovieDB@cluster0.jqsgi.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
-const app = express();
-
-app.use(moviesRouter);
+import moviesRouter from './routes/movies';
+import { PORT, uri } from './utils/constants';
 
 dotenv.config();
+
+const app = express();
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(moviesRouter);
 
 async function start(): Promise<void> {
   try {

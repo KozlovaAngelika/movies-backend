@@ -60,6 +60,12 @@
         }
       }
     ],
+    "@typescript-eslint/no-misused-promises": [
+      "error",
+      {
+        "checksVoidReturn": false
+      }
+    ],
     "max-len": [2, { "code": 120 }, { "ignoreUrls": true }],
     "brace-style": 0,
     "function-paren-newline": 0,

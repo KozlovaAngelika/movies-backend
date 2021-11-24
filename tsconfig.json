@@ -7,6 +7,6 @@
     "outDir": "dist"
   },
   "lib": ["es2018"],
-  "include": ["/**/*.ts"],
+  "include": ["/**/*.ts", "/**/*.d.ts"],
   "exclude": ["node_modules"]
 }
