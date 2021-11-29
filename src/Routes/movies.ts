@@ -1,16 +1,55 @@
 import { Request, Response, Router } from 'express';
+import { ObjectId } from 'mongoose';
 import Movie from '../models/movie';
 
-const moviesRouter = Router();
+interface MovieDto {
+  imdbId: string;
+  title: string;
+  image: string;
+}
 
-moviesRouter.get('/favoriteMovies', async (_req: Request, res: Response) => {
+interface MovieEntity {
+  _id: ObjectId;
+  imdbId: string;
+  title: string;
+  image: string;
+}
+
+class MovieDtoImpl implements MovieDto {
+  imdbId!: string;
+
+  title!: string;
+
+  image!: string;
+
+  constructor(imdbId: string, title: string, image: string) {
+    this.imdbId = imdbId;
+    this.title = title;
+    this.image = image;
+  }
+
+  static fromEntity({ imdbId, title, image }: MovieEntity) {
+    return new MovieDtoImpl(imdbId, title, image);
+  }
+}
+
+function getMoviesService(data): MovieDto[] {
+  return data.map(MovieDtoImpl.fromEntity);
+}
+
+const findMovies = async (_req: Request, res: Response) => {
   try {
     const favoriteMovies = await Movie.find({});
-    res.status(200).send(favoriteMovies);
+    const test = getMoviesService(favoriteMovies);
+    res.status(200).send(test);
   } catch (e) {
     res.status(500).send(e.message);
   }
-});
+};
+
+const moviesRouter = Router();
+
+moviesRouter.get('/favoriteMovies', findMovies);
 
 moviesRouter.post('/favoriteMovies', async (req: Request, res: Response) => {
   try {
