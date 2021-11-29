@@ -3,11 +3,12 @@ import dotenv from 'dotenv';
 import express from 'express';
 import mongoose from 'mongoose';
 import moviesRouter from './routes/movies';
-import { PORT, uri } from './utils/constants';
 
 dotenv.config();
 
 const app = express();
+const PORT = process.env.PORT || 5000;
+const uri = `mongodb+srv://Movie:${process.env.KEY}@cluster0.jqsgi.mongodb.net/Movies`;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
