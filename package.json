@@ -5,10 +5,10 @@
     "node": "~12.14.1"
   },
   "description": "",
-  "main": "dist/index.js",
+  "main": "dist/src/index.js",
   "scripts": {
-    "start": "tsc && node dist/index.js",
-    "dev": "tsc && nodemon dist/index.js",
+    "start": "tsc && node dist/src/index.js",
+    "dev": "tsc && nodemon dist/src/index.js",
     "lint": "eslint . --ext .ts",
     "prepare": "husky install"
   },
