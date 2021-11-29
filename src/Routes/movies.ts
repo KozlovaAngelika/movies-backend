@@ -15,11 +15,14 @@ moviesRouter.get('/favoriteMovies', async (_req: Request, res: Response) => {
 moviesRouter.post('/favoriteMovies', async (req: Request, res: Response) => {
   try {
     const movie = new Movie({
-      id: req.body.id,
+      imdbId: req.body.imdbId,
       title: req.body.title,
       image: req.body.image,
     });
     await movie.save();
+    res.status(200).json({
+      message: 'ok',
+    });
   } catch (e) {
     res.status(500).send(e.message);
   }
@@ -27,18 +30,17 @@ moviesRouter.post('/favoriteMovies', async (req: Request, res: Response) => {
 
 moviesRouter.delete('/favoriteMovies', async (req, res) => {
   try {
-    const result = await Movie.deleteOne({ id: req.body.id });
+    const result = await Movie.deleteOne({ imdbId: req.body.imdbId });
     if (result.deletedCount > 0) {
-      return res.status(200).json({
+      res.status(200).json({
         message: 'ok',
       });
     }
-
-    return res.status(500).json({
+    res.status(500).json({
       message: 'Error. Try again',
     });
   } catch (e) {
-    return res.status(500).json({
+    res.status(500).json({
       message: e.message,
     });
   }

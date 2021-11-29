@@ -1,5 +1,5 @@
 declare interface MovieDocument extends Document {
-  id: string;
+  imdbId: string;
   title: string;
   image: string;
 }
