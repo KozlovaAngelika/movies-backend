@@ -52,6 +52,11 @@ const moviesRouter = Router();
 moviesRouter.get('/favoriteMovies', findMovies);
 
 moviesRouter.post('/favoriteMovies', async (req: Request, res: Response) => {
+  if (!req.body) {
+    res.status(400).json({
+      message: 'Error. Data for saving hasn`t been transferred.',
+    });
+  }
   try {
     const movie = new Movie({
       imdbId: req.body.imdbId,
@@ -68,6 +73,11 @@ moviesRouter.post('/favoriteMovies', async (req: Request, res: Response) => {
 });
 
 moviesRouter.delete('/favoriteMovies', async (req, res) => {
+  if (typeof req.body.imdbId !== 'string') {
+    res.status(400).json({
+      message: 'Error. Invalid id',
+    });
+  }
   try {
     const result = await Movie.deleteOne({ imdbId: req.body.imdbId });
     if (result.deletedCount > 0) {
