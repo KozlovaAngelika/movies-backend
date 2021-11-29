@@ -52,7 +52,7 @@ const moviesRouter = Router();
 moviesRouter.get('/favoriteMovies', findMovies);
 
 moviesRouter.post('/favoriteMovies', async (req: Request, res: Response) => {
-  if (!req.body) {
+  if (!req.body.length) {
     res.status(400).json({
       message: 'Error. Data for saving hasn`t been transferred.',
     });
