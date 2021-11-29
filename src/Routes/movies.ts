@@ -40,8 +40,8 @@ function getMoviesService(data): MovieDto[] {
 const findMovies = async (_req: Request, res: Response) => {
   try {
     const favoriteMovies = await Movie.find({});
-    const test = getMoviesService(favoriteMovies);
-    res.status(200).send(test);
+    const data = getMoviesService(favoriteMovies);
+    res.status(200).send(data);
   } catch (e) {
     res.status(500).send(e.message);
   }
