@@ -1,6 +1,6 @@
 import { Request, Response, Router } from 'express';
-import { ObjectId } from 'mongoose';
 import Movie from '../models/movie';
+import { routes } from '../utils/constants';
 
 class MovieDtoImpl implements MovieDto {
   imdbId!: string;
@@ -32,9 +32,9 @@ const findMovies = async (_req: Request, res: Response) => {
 
 const moviesRouter = Router();
 
-moviesRouter.get('/favoriteMovies', findMovies);
+moviesRouter.get(routes.favoriteMovies, findMovies);
 
-moviesRouter.post('/favoriteMovies', async (req: Request, res: Response) => {
+moviesRouter.post(routes.favoriteMovies, async (req: Request, res: Response) => {
   if (!req.body.imdbId || !req.body.image || !req.body.title) {
     res.status(400).json({
       message: 'Error. Data for saving hasn`t been transferred.',
@@ -51,7 +51,7 @@ moviesRouter.post('/favoriteMovies', async (req: Request, res: Response) => {
   });
 });
 
-moviesRouter.delete('/favoriteMovies', async (req, res) => {
+moviesRouter.delete(routes.favoriteMovies, async (req, res) => {
   if (typeof req.body.imdbId !== 'string') {
     res.status(400).json({
       message: 'Error. Invalid id',
