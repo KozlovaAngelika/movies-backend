@@ -2,19 +2,6 @@ import { Request, Response, Router } from 'express';
 import { ObjectId } from 'mongoose';
 import Movie from '../models/movie';
 
-interface MovieDto {
-  imdbId: string;
-  title: string;
-  image: string;
-}
-
-interface MovieEntity {
-  _id: ObjectId;
-  imdbId: string;
-  title: string;
-  image: string;
-}
-
 class MovieDtoImpl implements MovieDto {
   imdbId!: string;
 
