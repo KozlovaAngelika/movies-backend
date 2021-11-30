@@ -38,13 +38,9 @@ function getMoviesService(data): MovieDto[] {
 }
 
 const findMovies = async (_req: Request, res: Response) => {
-  try {
-    const favoriteMovies = await Movie.find({});
-    const data = getMoviesService(favoriteMovies);
-    res.status(200).send(data);
-  } catch (e) {
-    res.status(500).send(e.message);
-  }
+  const favoriteMovies = await Movie.find({});
+  const data = getMoviesService(favoriteMovies);
+  res.status(200).send(data);
 };
 
 const moviesRouter = Router();
@@ -57,19 +53,15 @@ moviesRouter.post('/favoriteMovies', async (req: Request, res: Response) => {
       message: 'Error. Data for saving hasn`t been transferred.',
     });
   }
-  try {
-    const movie = new Movie({
-      imdbId: req.body.imdbId,
-      title: req.body.title,
-      image: req.body.image,
-    });
-    await movie.save();
-    res.status(200).json({
-      message: 'ok',
-    });
-  } catch (e) {
-    res.status(500).send(e.message);
-  }
+  const movie = new Movie({
+    imdbId: req.body.imdbId,
+    title: req.body.title,
+    image: req.body.image,
+  });
+  await movie.save();
+  res.status(200).json({
+    message: 'ok',
+  });
 });
 
 moviesRouter.delete('/favoriteMovies', async (req, res) => {
@@ -78,21 +70,15 @@ moviesRouter.delete('/favoriteMovies', async (req, res) => {
       message: 'Error. Invalid id',
     });
   }
-  try {
-    const result = await Movie.deleteOne({ imdbId: req.body.imdbId });
-    if (result.deletedCount > 0) {
-      res.status(200).json({
-        message: 'ok',
-      });
-    }
-    res.status(500).json({
-      message: 'Error. Try again',
-    });
-  } catch (e) {
-    res.status(500).json({
-      message: e.message,
+  const result = await Movie.deleteOne({ imdbId: req.body.imdbId });
+  if (result.deletedCount > 0) {
+    res.status(200).json({
+      message: 'ok',
     });
   }
+  res.status(500).json({
+    message: 'Error. Try again',
+  });
 });
 
 export default moviesRouter;

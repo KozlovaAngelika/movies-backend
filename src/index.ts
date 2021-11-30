@@ -13,6 +13,11 @@ const uri = `mongodb+srv://Movie:${process.env.KEY}@cluster0.jqsgi.mongodb.net/M
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(moviesRouter);
+app.use((err, req, res, next) => {
+  res.status(500).json({
+    message: err.message,
+  });
+});
 
 async function start(): Promise<void> {
   try {
