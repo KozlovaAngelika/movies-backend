@@ -1,4 +1,8 @@
 {
+  "ts-node": {
+    "files": true
+  },
+  "files": ["src/index.ts", "src/types/entities.d.ts"],
   "compilerOptions": {
     "module": "commonjs",
     "esModuleInterop": true,
@@ -7,6 +11,6 @@
     "outDir": "dist"
   },
   "lib": ["es2018"],
-  "include": ["/**/*.ts"],
+  "include": ["/**/*.ts", "/**/*.d.ts"],
   "exclude": ["node_modules"]
 }
